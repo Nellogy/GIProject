@@ -1,5 +1,5 @@
 # Used Tools
 
-- TypeORM:      typeorm.io
+- TypeORM:      http://typeorm.io/#/
 - TypeScript:   
 - Restify:      
