@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piezas Taller</title>
+</head>
+<body>
+    <form action="">
+        <!-- Category selector -->
+        Categoria:
+        <select name="category"> <!-- size="4" multiple -->
+            <!-- <option value="volvo">Volvo</option> -->
+            <!-- use the database to fill the form -->
+        </select>
+        <br><br>
+
+        <!-- Database table -->
+        <select name="select" class="companies" size="6" multiple onChange="">
+            <option value=\"".$row['cname']."\">".$row['cname']."</option>
+        </select>
+        <br><br>
+
+        <!-- Editable fields -->
+        Nombre:<br>
+        <input type="text" name="name" value="product name">
+        <br><br>
+        Fabricante:<br>
+        <input type="text" name="seller" value="seller name">
+        <br><br>
+        <input type="submit" value="Insertar">
+        <input type="submit" value="Borrar">
+        <input type="submit" value="Modificar">
+        <input type="reset" value="Limpiar">
+        <input type="submit" value="Salir">
+    </form>
+</body>
+</html>

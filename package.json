@@ -1,5 +1,5 @@
 {
-   "name": "trabajoGI1819",
+   "name": "GI1819",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
@@ -8,9 +8,10 @@
       "typescript": "2.5.2"
    },
    "dependencies": {
-      "typeorm": "0.2.9",
+      "mysql": "^2.14.1",
       "reflect-metadata": "^0.1.10",
-      "mysql": "^2.14.1"
+      "restify": "^7.2.3",
+      "typeorm": "0.2.9"
    },
    "scripts": {
       "start": "ts-node src/index.ts"
