@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Piezas Taller</title>
+    <script type="text/javascript" src="../js/Piezas.js"></script>
+    <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-    <form action="">
+    <form id="dataForm" name="dataForm" action="Piezas.html" onsubmit="toSubmit()">
         <!-- Category selector -->
         Categoria:
         <select name="category"> <!-- size="4" multiple -->
@@ -22,16 +24,16 @@
 
         <!-- Editable fields -->
         Nombre:<br>
-        <input type="text" name="name" value="product name">
+        <input type="text" name="name" value="">
         <br><br>
         Fabricante:<br>
-        <input type="text" name="seller" value="seller name">
+        <input type="text" name="seller" value="">
         <br><br>
         <input type="submit" value="Insertar">
         <input type="submit" value="Borrar">
         <input type="submit" value="Modificar">
         <input type="reset" value="Limpiar">
-        <input type="submit" value="Salir">
+        <input type="submit" value="Salir" formaction="Login.html">
     </form>
 </body>
 </html>
