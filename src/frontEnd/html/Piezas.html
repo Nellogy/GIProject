@@ -17,8 +17,18 @@
         <br><br>
 
         <!-- Database table -->
-        <select name="select" class="companies" size="6" multiple onChange="">
-            <option value=\"".$row['cname']."\">".$row['cname']."</option>
+        <select id="table" size="6" multiple onChange="">
+
+            <table>
+                <option>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>FABRICANTE</th>
+                    <th>ID_TIPO</th>
+                </tr>
+                </option>
+            </table>
         </select>
         <br><br>
 

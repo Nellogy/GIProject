@@ -8,8 +8,9 @@
       "typescript": "2.5.2"
    },
    "dependencies": {
+      "jquery": "^3.3.1",
       "mysql": "^2.14.1",
-      "reflect-metadata": "^0.1.10",
+      "reflect-metadata": "^0.1.12",
       "restify": "^7.2.3",
       "typeorm": "0.2.9"
    },

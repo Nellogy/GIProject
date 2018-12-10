@@ -5,7 +5,7 @@ function login(){
 
     //Sending login data to restify
     let correct = $.ajax({
-        url: "http://localhost:3307",
+        url: "http://127.0.0.1:3307",
         async: false,
         type: "POST",
         data: {usr: user, pss: password},
@@ -15,7 +15,7 @@ function login(){
             alert("please, try again");
         }
     });
-    
+
     //if the answer of restify is True, log in; if not, reload page.
     if (!correct){
         document.loginForm.action = "Login.html"; //nos quedamos en el login si el usuario y la pass no son correctos

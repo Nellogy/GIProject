@@ -1,47 +1,71 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
+import { createConnection, getConnection } from "typeorm";
+import { tPermiso } from "./backEnd/entity/tPermiso";
+import { tPiezas } from "./backEnd/entity/tPiezas";
+import { tRol } from "./backEnd/entity/tRol";
+import { tUsuario } from "./backEnd/entity/tUsuario";
+import { tTipoPiezas } from "./backEnd/entity/tTipoPiezas";
 
-const config = require('./config');
 const restify = require('restify');
-const mysql = require('mysql');
+const server = restify.createServer();
 
-const server = restify.createServer({
-    name: config.name,
-    version: config.version
-});
+createConnection({
+    type: "mysql",
+    host: "localhost",
+    port: 3306,
+    username: "root",
+    password: "password",
+    database: "trabajogi1819",
+    entities: [
+        tUsuario,
+        tPermiso,
+        tRol,
+        tPiezas,
+        tTipoPiezas
+    ],
+    synchronize: true,
+    logging: false
+}).then( async connection => {
+    //here you can start to work with your entities
 
-let connection = config.db.get;
+    // Load tables into variables
+    let savedRol = await connection.manager.find(tRol);
+    let savedTipoPiezas = await connection.manager.find(tTipoPiezas);
+    //let savedPermiso = await connection.manager.find(tPermiso);
+    //let savedPiezas = await connection.manager.find(tPiezas);
+    //let savedUsuario = await connection.manager.find(tUsuario);
 
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
+    // Load data and metadata
+    let usuariosRepository = connection.getRepository(tUsuario);
+    let savedUsuarios = await usuariosRepository.find({ relations: ["rolName"]});
 
-server.listen(3307, function(){
-    console.log('%s Listening at %s', server.name, server.url);
-});
+    let permisosRepository = connection.getRepository(tPermiso);
+    let savedPermisos = await permisosRepository.find({ relations: ["rolName"]});
 
-server.get('/usuarios', function(req, res){
-    connection.query('SELECT * FROM tUsuario', function(error, results, fields){
-        if(error) throw error;
-        res.end(JSON.stringify(results));
-    });
-});
+    let piezasRepository = connection.getRepository(tPiezas);
+    let savedPiezas = await piezasRepository.find({ relations: ["idTipo"]});
 
-createConnection().then(async algo => {
-    console.log("connection was created");
-/* Inserting data in the user table on mySQL
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
-
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
-
-    console.log("Here you can setup and run express/koa/any other framework.");*/
+    console.log(savedUsuarios);
+    console.log(savedPermisos);
+    console.log(savedRol);
+    console.log(savedPiezas);
+    console.log(savedTipoPiezas);
 
 }).catch(error => console.log(error));
+
+server.use(restify.plugins.bodyParser({
+    mapParams: false,
+}));
+
+server.get('/\/(.*)?.*/', restify.plugins.serveStatic({
+    directory: './frontEnd/js/Login.js',
+    default: './frontEnd/html/Login.html',
+    maxAge: 0
+}));
+
+
+
+//restify code
+server.listen(3307, '127.0.0.1', function(){
+    console.log('ready on %s', server.url);
+});
