@@ -5,7 +5,9 @@ import { tPiezas } from "./backEnd/entity/tPiezas";
 import { tRol } from "./backEnd/entity/tRol";
 import { tUsuario } from "./backEnd/entity/tUsuario";
 import { tTipoPiezas } from "./backEnd/entity/tTipoPiezas";
+import {isNullOrUndefined} from "util";
 
+const corsMiddleware = require('restify-cors-middleware');
 const restify = require('restify');
 const server = restify.createServer();
 
@@ -51,22 +53,76 @@ createConnection({
     console.log(savedPiezas);
     console.log(savedTipoPiezas);
 
+
+    const cors = corsMiddleware({
+        preflightMaxAge: 5, //optional
+        origins: ['*'],
+        allowHeaders: ['API-Token'],
+        exposeHeaders: ['API-Token-Expiry']
+    });
+
+    server.pre(cors.preflight);
+    server.use(cors.actual);
+
+    //Restify
+    server.use(restify.plugins.bodyParser({
+        mapParams: true,
+    }));
+
+    server.listen(3307, '127.0.0.1', function(){
+        console.log('ready on %s', server.url);
+    });
+
+
+    server.get('/usuarios', async (req, res, next) => {
+    //obtener lista de usuarios
+        res.send({
+            results: savedUsuarios,
+        });
+        next();
+    });
+
+    server.get('/piezas', async (req, res, next) => {
+    //obtener lista de usuarios
+        res.send({
+            results: savedPiezas,
+        });
+        next();
+    });
+
+    server.get('/tipoPiezas', async (req, res, next) => {
+    //obtener lista de usuarios
+        res.send({
+            results: savedTipoPiezas,
+        });
+        next();
+    });
+
+    server.post('/login', async (req, res, next) => {
+    //obtener lista de usuarios
+        let usr = req.body.usr;
+        let pss = req.body.pss;
+        let queryRes = await usuariosRepository.findOne({ nombre: usr, password: pss });
+
+        if(isNullOrUndefined(queryRes)){
+            res.send({
+                exist: false,
+            });
+        } else {
+            res.send({
+                exist: true,
+            });
+        }
+        next();
+    });
+
+    server.post('/piezasd', async (req, res, next) => {
+    //obtener lista de usuarios
+        let queryRes = await piezasRepository.findOne({ id: req.body.id });
+        res.send({
+            nombre: queryRes.nombre,
+            fabricante: queryRes.fabricante
+        });
+        next();
+    });
 }).catch(error => console.log(error));
-
-server.use(restify.plugins.bodyParser({
-    mapParams: false,
-}));
-
-server.get('/\/(.*)?.*/', restify.plugins.serveStatic({
-    directory: './frontEnd/js/Login.js',
-    default: './frontEnd/html/Login.html',
-    maxAge: 0
-}));
-
-
-//restify code
-server.listen(3307, '127.0.0.1', function(){
-    console.log('ready on %s', server.url);
-});
-
-let routes = require('./frontEnd/js/routes.js');

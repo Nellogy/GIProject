@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Piezas Taller</title>
-    <script type="text/javascript" src="../js/Piezas.js"></script>
-    <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
     <form id="dataForm" name="dataForm" action="Piezas.html" onsubmit="toSubmit()">
         <!-- Category selector -->
         Categoria:
-        <select name="category"> <!-- size="4" multiple -->
+        <select id="category" name="category"> <!-- size="4" multiple -->
             <!-- <option value="volvo">Volvo</option> -->
             <!-- use the database to fill the form -->
         </select>
@@ -18,8 +16,7 @@
 
         <!-- Database table -->
         <select id="table" size="6" multiple onChange="">
-
-            <table>
+            <table id="tableField">
                 <option>
                 <tr>
                     <th>ID</th>
@@ -34,10 +31,10 @@
 
         <!-- Editable fields -->
         Nombre:<br>
-        <input type="text" name="name" value="">
+        <input id="nombreField" type="text" name="name" value="">
         <br><br>
         Fabricante:<br>
-        <input type="text" name="seller" value="">
+        <input id="fabricanteField" type="text" name="seller" value="">
         <br><br>
         <input type="submit" value="Insertar">
         <input type="submit" value="Borrar">
@@ -45,5 +42,7 @@
         <input type="reset" value="Limpiar">
         <input type="submit" value="Salir" formaction="Login.html">
     </form>
+    <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/Piezas.js"></script>
 </body>
 </html>

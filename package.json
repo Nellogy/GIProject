@@ -13,6 +13,7 @@
       "mysql": "^2.14.1",
       "reflect-metadata": "^0.1.12",
       "restify": "^7.2.3",
+      "restify-cors-middleware": "^1.1.1",
       "typeorm": "0.2.9"
    },
    "scripts": {
