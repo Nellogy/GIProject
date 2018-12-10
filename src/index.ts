@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { createConnection, getConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { tPermiso } from "./backEnd/entity/tPermiso";
 import { tPiezas } from "./backEnd/entity/tPiezas";
 import { tRol } from "./backEnd/entity/tRol";
@@ -64,8 +64,9 @@ server.get('/\/(.*)?.*/', restify.plugins.serveStatic({
 }));
 
 
-
 //restify code
 server.listen(3307, '127.0.0.1', function(){
     console.log('ready on %s', server.url);
 });
+
+let routes = require('./frontEnd/js/routes.js');
