@@ -24,7 +24,7 @@ $('#mainButton').click(function login(e) {
                 alert("Incorrect data");
                 window.location = 'Login.html'; //nos quedamos en el login si el usuario y la pass no son correctos
             } else {
-                window.location = 'Piezas.html' + '/?rol=' + rol;
+                window.location = 'Piezas.html';
             }
         },
 

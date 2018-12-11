@@ -3,19 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
 <body>
-    <h3>Bienvenido</h3>
-    <form id="loginForm" name="loginForm" onsubmit="login()">
-        Usuario:<br>
-        <input type="text" name="user" value="">
-        <br><br>
-        Contraseña:<br>
-        <input type="password" name="password" value="">
-        <br><br>
-        <input id="mainButton" type="button" value="OK">  <input type="reset">
-    </form>
-    <script type="text/javascript" src="../js/Login.js"></script>
+<h3 style="text-align: center;">Bienvenido</h3>
+<form id="loginForm" class="pure-form pure-form-aligned" style="text-align: center;">
+
+    <div class="pure-control-group">
+        <label for="user">Usuario</label>
+        <input id="user" type="text" placeholder="Usuario">
+    </div>
+
+    <div class="pure-control-group">
+        <label for="password">Clave</label>
+        <input id="password" type="password" placeholder="Clave">
+    </div>
+
+    <div class="pure-controls">
+        <button id="mainButton" type="button" class="pure-button pure-button-primary">Iniciar Sesion</button>
+        <button type="reset" class="pure-button pure-button-primary">Resetear</button>
+    </div>
+
+</form>
+<script type="text/javascript" src="../js/Login.js"></script>
 </body>
 </html>
+
