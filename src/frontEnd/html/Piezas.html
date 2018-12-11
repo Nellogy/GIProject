@@ -15,16 +15,8 @@
         <br><br>
 
         <!-- Database table -->
-        <select id="table" size="6" multiple onChange="">
+        <select id="table" size="12" multiple>
             <table id="tableField">
-                <option>
-                <tr>
-                    <th>ID</th>
-                    <th>NOMBRE</th>
-                    <th>FABRICANTE</th>
-                    <th>ID_TIPO</th>
-                </tr>
-                </option>
             </table>
         </select>
         <br><br>
@@ -36,9 +28,9 @@
         Fabricante:<br>
         <input id="fabricanteField" type="text" name="seller" value="">
         <br><br>
-        <input type="submit" value="Insertar">
-        <input type="submit" value="Borrar">
-        <input type="submit" value="Modificar">
+        <input id="insertButton" type="submit" value="Insertar">
+        <input id="deleteButton" type="button" value="Borrar">
+        <input id="updateButton" type="submit" value="Modificar">
         <input type="reset" value="Limpiar">
         <input type="submit" value="Salir" formaction="Login.html">
     </form>

@@ -22,7 +22,6 @@ $('#mainButton').click(function login(e) {
                 alert("Incorrect data");
                 window.location = 'Login.html'; //nos quedamos en el login si el usuario y la pass no son correctos
             } else {
-                alert("Logging in...");
                 window.location = 'Piezas.html';
             }
         },

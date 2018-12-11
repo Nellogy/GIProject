@@ -5,7 +5,7 @@ import { tPiezas } from "./backEnd/entity/tPiezas";
 import { tRol } from "./backEnd/entity/tRol";
 import { tUsuario } from "./backEnd/entity/tUsuario";
 import { tTipoPiezas } from "./backEnd/entity/tTipoPiezas";
-import {isNullOrUndefined} from "util";
+import { isNullOrUndefined } from "util";
 
 const corsMiddleware = require('restify-cors-middleware');
 const restify = require('restify');
@@ -38,6 +38,8 @@ createConnection({
     //let savedUsuario = await connection.manager.find(tUsuario);
 
     // Load data and metadata
+    let tipoPiezasRepository = connection.getRepository(tTipoPiezas);
+
     let usuariosRepository = connection.getRepository(tUsuario);
     let savedUsuarios = await usuariosRepository.find({ relations: ["rolName"]});
 
@@ -84,6 +86,9 @@ createConnection({
 
     server.get('/piezas', async (req, res, next) => {
     //obtener lista de usuarios
+        piezasRepository = connection.getRepository(tPiezas);
+        savedPiezas = await piezasRepository.find({ relations: ["idTipo"]});
+
         res.send({
             results: savedPiezas,
         });
@@ -116,13 +121,65 @@ createConnection({
         next();
     });
 
-    server.post('/piezasd', async (req, res, next) => {
-    //obtener lista de usuarios
+    server.post('/piezasPOST', async (req, res, next) => {
         let queryRes = await piezasRepository.findOne({ id: req.body.id });
         res.send({
             nombre: queryRes.nombre,
             fabricante: queryRes.fabricante
         });
         next();
+    });
+
+    server.post('/deletePieza', async (req, res, next) => {
+        let queryRes = await piezasRepository.findOne({ id: req.body.id });
+        await piezasRepository.remove(queryRes);
+
+        res.send({
+            nombre: queryRes.nombre,
+        });
+        next();
+    });
+
+    server.post('/tipoPiezasID', async (req, res, next) => {
+        tipoPiezasRepository = connection.getRepository(tTipoPiezas);
+        let queryRes = await tipoPiezasRepository.findOne({ nombre: req.body.nombre });
+        res.send({
+            results: queryRes.id_tipo,
+        });
+        next();
+    });
+
+    server.post('/insertPieza', async (req, res, next) => {
+        //Pieza data
+        let newPieza = new tPiezas();
+        newPieza.nombre = req.body.nombre;
+        newPieza.fabricante = req.body.fabricante;
+        newPieza.idTipo = await tipoPiezasRepository.findOne({nombre: req.body.tipoPiezaNombre });
+
+        //save the Pieza
+        await piezasRepository.save(newPieza);
+
+        res.send({
+            nombre: newPieza.nombre,
+            idPieza: newPieza.id,
+        });
+        next();
+    });
+
+    server.post('/updatePieza', async (req, res, next) => {
+        let piezaRepository = connection.getRepository(tPiezas);
+        let pieza = await piezaRepository.findOne(req.body.id);
+
+        pieza.nombre = req.body.nombre;
+        pieza.fabricante = req.body.fabricante;
+
+        await piezasRepository.save(pieza);
+
+        res.send({
+            nombre: pieza.nombre,
+            idPieza: pieza.id
+        });
+
+        await piezaRepository.save(pieza);
     });
 }).catch(error => console.log(error));
