@@ -1,3 +1,5 @@
+let rol;
+
 //Function to submit the login form
 $('#mainButton').click(function login(e) {
     e.preventDefault();
@@ -5,7 +7,7 @@ $('#mainButton').click(function login(e) {
     let password = document.getElementById("loginForm").elements[1].value;
 
     //Sending login data to restify
-    let correct = $.ajax({
+    $.ajax({
         url: "http://127.0.0.1:3307/login",
         async: true,
         type: "POST",
@@ -22,7 +24,7 @@ $('#mainButton').click(function login(e) {
                 alert("Incorrect data");
                 window.location = 'Login.html'; //nos quedamos en el login si el usuario y la pass no son correctos
             } else {
-                window.location = 'Piezas.html';
+                window.location = 'Piezas.html' + '/?rol=' + rol;
             }
         },
 

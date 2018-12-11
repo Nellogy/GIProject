@@ -28,6 +28,7 @@ createConnection({
     synchronize: true,
     logging: false
 }).then( async connection => {
+    let currentRol;
     //here you can start to work with your entities
 
     // Load tables into variables
@@ -49,12 +50,7 @@ createConnection({
     let piezasRepository = connection.getRepository(tPiezas);
     let savedPiezas = await piezasRepository.find({ relations: ["idTipo"]});
 
-    console.log(savedUsuarios);
-    console.log(savedPermisos);
-    console.log(savedRol);
-    console.log(savedPiezas);
-    console.log(savedTipoPiezas);
-
+    console.log("data loaded correctly");
 
     const cors = corsMiddleware({
         preflightMaxAge: 5, //optional
@@ -95,6 +91,13 @@ createConnection({
         next();
     });
 
+    server.get('/rol', async (req, res, next) => {
+       res.send({
+           rol: currentRol,
+       });
+       next();
+    });
+
     server.get('/tipoPiezas', async (req, res, next) => {
     //obtener lista de usuarios
         res.send({
@@ -107,13 +110,16 @@ createConnection({
     //obtener lista de usuarios
         let usr = req.body.usr;
         let pss = req.body.pss;
-        let queryRes = await usuariosRepository.findOne({ nombre: usr, password: pss });
+        let queryRes = await usuariosRepository.findOne( { nombre: usr, password: pss });
 
         if(isNullOrUndefined(queryRes)){
             res.send({
                 exist: false,
             });
         } else {
+            let secondQuery = await usuariosRepository.findOne({ nombre: usr, password: pss }, {relations: ["rolName"]});
+            currentRol = secondQuery.rolName.rolName;
+
             res.send({
                 exist: true,
             });

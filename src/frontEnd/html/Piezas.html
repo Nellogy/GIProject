@@ -5,7 +5,7 @@
     <title>Piezas Taller</title>
 </head>
 <body>
-    <form id="dataForm" name="dataForm" action="Piezas.html" onsubmit="toSubmit()">
+    <form id="dataForm" name="dataForm" action="Piezas.html">
         <!-- Category selector -->
         Categoria:
         <select id="category" name="category"> <!-- size="4" multiple -->
@@ -28,13 +28,13 @@
         Fabricante:<br>
         <input id="fabricanteField" type="text" name="seller" value="">
         <br><br>
-        <input id="insertButton" type="submit" value="Insertar">
+        <input id="insertButton" type="button" value="Insertar">
         <input id="deleteButton" type="button" value="Borrar">
-        <input id="updateButton" type="submit" value="Modificar">
+        <input id="updateButton" type="button" value="Modificar">
         <input type="reset" value="Limpiar">
-        <input type="submit" value="Salir" formaction="Login.html">
+        <input id="exitButton" type="button" value="Salir">
     </form>
     <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../js/Piezas.js"></script>
+    <script type="text/javascript" src="../../js/Piezas.js"></script>
 </body>
 </html>
