@@ -68,7 +68,7 @@ $('#updateButton').click(function (e) {
 
 $('#exitButton').click(function (e) {
 
-    window.location = '../login.html';
+    window.location = 'login.html';
 
 });
 
@@ -173,11 +173,11 @@ function print(){
             type: "GET",
             success: function(response){
                 //show the response json fields in the list
-                $('#table').append(`<option disabled><tr><th>ID&#9</th><th>NOMBRE&#9</th><th>FABRICANTE&#9</th><th>ID_TIPO</th></tr></option>`);
+                $('#table').append(`<option disabled><thead><tr><th>ID&#9//&#9</th><th>NOMBRE&#9//&#9</th><th>FABRICANTE&#9//&#9</th><th>ID_TIPO</th></tr></thead></option>`);
                 for(let i=0; i<response.results.length; i++){
                     if(selectedCategory === response.results[i].idTipo.nombre){
                         const item = response.results[i];
-                        $('#table').append(`<option><tr><td>${item.id}&#9</td><td>${item.nombre}&#9</td><td>${item.fabricante}&#9</td><td>${item.idTipo.id_tipo}&#9</td></tr></option>`);
+                        $('#table').append(`<option><tr><td>${item.id}&#9//&#9</td><td>${item.nombre}&#9//&#9</td><td>${item.fabricante}&#9//&#9</td><td>${item.idTipo.id_tipo}&#9//&#9</td></tr></option>`);
                     }
                 }
             },

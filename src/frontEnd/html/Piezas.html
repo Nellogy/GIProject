@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Piezas Taller</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
-<body>
-    <form id="dataForm" name="dataForm" action="Piezas.html">
+<body style="text-align: center">
+    <form id="dataForm" name="dataForm" class="pure-form pure-form-aligned" action="Piezas.html">
+        <br>
         <!-- Category selector -->
         Categoria:
         <select id="category" name="category"> <!-- size="4" multiple -->
@@ -16,23 +19,24 @@
 
         <!-- Database table -->
         <select id="table" size="12" multiple>
-            <table id="tableField">
+            <table id="tableField"  class="pure-table">
+
             </table>
         </select>
         <br><br>
 
         <!-- Editable fields -->
-        Nombre:<br>
-        <input id="nombreField" type="text" name="name" value="">
+        Nombre:
+        <input id="nombreField" type="text" name="name" class="pure-input-1-3" value="">
         <br><br>
-        Fabricante:<br>
-        <input id="fabricanteField" type="text" name="seller" value="">
+        Fabricante:
+        <input id="fabricanteField" type="text" name="seller" class="pure-input-1-3" value="">
         <br><br>
-        <input id="insertButton" type="button" value="Insertar">
-        <input id="deleteButton" type="button" value="Borrar">
-        <input id="updateButton" type="button" value="Modificar">
-        <input type="reset" value="Limpiar">
-        <input id="exitButton" type="button" value="Salir">
+        <input id="insertButton" type="button" class="pure-button pure-button-primary" value="Insertar">
+        <input id="deleteButton" type="button" class="pure-button pure-button-primary" value="Borrar">
+        <input id="updateButton" type="button" class="pure-button pure-button-primary" value="Modificar">
+        <input type="reset" value="Limpiar" class="pure-button pure-button-primary">
+        <input id="exitButton" type="button" class="pure-button pure-button-primary" value="Salir">
     </form>
     <script type ="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../js/Piezas.js"></script>
